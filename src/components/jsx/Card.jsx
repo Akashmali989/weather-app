@@ -5,23 +5,10 @@ import "../css/Card.css";
 
 const Card = (props) => {
   const Weather = useWeather();
-
-  // Generate 100 star elements for a denser effect
-  const stars = Array.from({ length: 100 }, (_, index) => (
-    <div key={index} className="star" style={{
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      width: `${1 + Math.random() * 3}px`,
-      height: `${1 + Math.random() * 3}px`,
-      animationDelay: `${Math.random() * 3}s`
-    }}></div>
-  ));
-
-
-
   const getWeatherIcon = (condition) => {
     const text = condition?.text?.toLowerCase();
-    if (text?.includes("sunny") || text?.includes("clear")) return <WiDaySunny size={80} />;
+    if (text?.includes("sunny") || text?.includes("clear"))
+      return <WiDaySunny size={80} />;
     if (text?.includes("cloud")) return <WiCloud size={80} />;
     if (text?.includes("rain")) return <WiRain size={80} />;
     if (text?.includes("snow")) return <WiSnow size={80} />;
@@ -29,8 +16,7 @@ const Card = (props) => {
   };
 
   return (
-    <div className='container'>
-      {stars}
+    <div className="container">
       <h1>Weather Forcasting</h1>
       <div className="search">
         <input
@@ -54,9 +40,21 @@ const Card = (props) => {
           ) : (
             <WiDaySunny size={80} />
           )}
-          <h3>{Weather?.data?.current?.condition?.text || "Weather Condition"}</h3>
-          <h3>Temperature ~ {Weather.data?.current?.temp_c ? `${Weather.data.current.temp_c}°C` : "N/A"}</h3>
-          <h3>Temperature ~ {Weather.data?.current?.temp_f ? `${Weather.data.current.temp_f}°F` : "N/A"}</h3>
+          <h3>
+            {Weather?.data?.current?.condition?.text || "Weather Condition"}
+          </h3>
+          <h3>
+            Temperature ~{" "}
+            {Weather.data?.current?.temp_c
+              ? `${Weather.data.current.temp_c}°C`
+              : "N/A"}
+          </h3>
+          <h3>
+            Temperature ~{" "}
+            {Weather.data?.current?.temp_f
+              ? `${Weather.data.current.temp_f}°F`
+              : "N/A"}
+          </h3>
           <h3>Humidity ~ {Weather.data?.current?.humidity}%</h3>
           <h4>
             City ~ {Weather.data?.location?.name || "City"},<br />
